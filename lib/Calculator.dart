@@ -93,7 +93,11 @@ Widget CustomButton(String text){
     // splashColor: Color(0xFF1d2630),
     splashColor: Colors.orange,
     onTap: () {
-      
+      setState(() {
+        handleButtons(text){
+
+        }
+      });
     },
     child: Ink(
       decoration: BoxDecoration(
@@ -127,5 +131,13 @@ getBgColor(text){
   }
   if(text=="="){return Color.fromARGB(255, 104, 215, 109);}
   return Colors.grey;
+}
+handleButtons(String text){
+  if(text =="AC"){
+    UserInput = "";
+     Result = "0";
+     return;
+  }
+  
 }
 }
