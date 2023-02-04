@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:math_expressions/math_expressions.dart';
 
 class Calculator extends StatefulWidget {
   const Calculator({super.key});
@@ -50,7 +51,7 @@ class _CalculatorState extends State<Calculator> {
                   alignment: Alignment.centerRight,
                   child: Text(UserInput, style: TextStyle(
                     fontSize: 32,
-                    color: Colors.white
+                    color: Colors.white,
                   ),
                   ),
                 ),
@@ -94,9 +95,7 @@ Widget CustomButton(String text){
     splashColor: Colors.orange,
     onTap: () {
       setState(() {
-        handleButtons(text){
-
-        }
+        handleButtons(text);
       });
     },
     child: Ink(
@@ -139,10 +138,33 @@ handleButtons(String text){
      return;
   }
   if(text == "C"){
-   if(UserInput.isEmpty){
+   if(UserInput.isNotEmpty){
     UserInput= UserInput.substring(0, UserInput.length-1);
+    return;
+   }
+   else {return null;
    }
   }
-  
+ if(text == "="){
+    Result = calculate();
+    UserInput =Result;
+    
+    if(Result.endsWith(".0")){
+      Result = Result.replaceAll(".0", "0");
+      return;
+    }
+  }
+  UserInput = UserInput + text;
+
 } 
+String calculate(){
+try{
+  var exp = Parser().parse(UserInput);
+  var evalution = exp.evaluate(EvaluationType.REAL, ContextModel());
+  return evalution.toString();
+}
+catch(e){
+  return "ERROR"; 
+}
+}
 }
