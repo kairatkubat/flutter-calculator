@@ -125,9 +125,10 @@ getColor(String text){
   return Colors.white;
 }
 getBgColor(text){
-  if(text == "AC"){
+  if(text == "AC"|| text == "C"){
     return Color.fromARGB(255, 215, 100, 100);
   }
+  
   if(text=="="){return Color.fromARGB(255, 104, 215, 109);}
   return Colors.grey;
 }
@@ -148,12 +149,20 @@ handleButtons(String text){
  if(text == "="){
     Result = calculate();
     UserInput =Result;
-    
-    if(Result.endsWith(".0")){
-      Result = Result.replaceAll(".0", "0");
+
+  if(Result.endsWith(".0")){
+      Result = Result.replaceAll(".0", "");
       return;
     }
+    if(UserInput.endsWith(".0")){
+      UserInput = UserInput.replaceAll(".0", "");
+      return;
+    }
+
+    
   }
+  
+
   UserInput = UserInput + text;
 
 } 
