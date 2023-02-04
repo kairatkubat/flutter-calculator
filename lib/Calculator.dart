@@ -138,6 +138,11 @@ handleButtons(String text){
      Result = "0";
      return;
   }
+  if(text == "C"){
+   if(UserInput.isEmpty){
+    UserInput= UserInput.substring(0, UserInput.length-1);
+   }
+  }
   
 }
 }
